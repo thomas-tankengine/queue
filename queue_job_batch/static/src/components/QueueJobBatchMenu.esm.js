@@ -3,7 +3,7 @@
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 */
 
-import {Component, useState} from "@odoo/owl";
+import {Component} from "@odoo/owl";
 import {ColumnProgress} from "@web/views/view_components/column_progress";
 import {Dropdown} from "@web/core/dropdown/dropdown";
 import {registry} from "@web/core/registry";
@@ -16,7 +16,6 @@ import {_t} from "@web/core/l10n/translation";
 export class QueueJobBatchMenu extends Component {
     static template = "queue_job_batch.QueueJobBatchMenu";
     static components = {Dropdown, ColumnProgress};
-    static props = [];
 
     /**
      * @override
@@ -24,15 +23,15 @@ export class QueueJobBatchMenu extends Component {
     setup() {
         super.setup();
         this.discussSystray = useDiscussSystray();
-        this.store = useState(useService("mail.store"));
+        this.store = useService("mail.store");
         this.action = useService("action");
         this.userId = user.userId;
-        this.ui = useState(useService("ui"));
+        this.ui = useService("ui");
         this.dropdown = useDropdownState();
     }
 
     onBeforeOpen() {
-        this.store.fetchData({systray_get_queue_job_batches: true});
+        this.store.fetchStoreData("systray_get_queue_job_batches");
     }
 
     getGroupInfo(batch) {

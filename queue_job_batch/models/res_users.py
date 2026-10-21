@@ -8,19 +8,15 @@ class Users(models.Model):
     _name = "res.users"
     _inherit = ["res.users"]
 
-    def _init_store_data(self, store):
-        res = super()._init_store_data(store)
-        store.add(
-            {
-                "hasQueueJobBatchUserGroup": self.env.user.has_group(
-                    "queue_job_batch.group_queue_job_batch_user"
-                ),
-            }
+    def _store_init_global_fields(self, res):
+        super()._store_init_global_fields(res)
+        res.attr(
+            "hasQueueJobBatchUserGroup",
+            lambda u: u.has_group("queue_job_batch.group_queue_job_batch_user"),
         )
-        return res
 
     def _get_queue_job_batches(self):
-        # See :meth:`controllers.webclient.WebClient._process_request_for_internal_user`
+        # See :meth:`controllers.webclient.WebClient.store_get_queue_job_batches`
         self.ensure_one()
         return self.env["queue.job.batch"].search(
             [

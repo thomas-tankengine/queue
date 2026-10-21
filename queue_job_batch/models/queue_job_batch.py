@@ -1,10 +1,8 @@
 # Copyright 2019 Creu Blanca
 # Copyright 2023 ForgeFlow S.L. (http://www.forgeflow.com)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-
-from odoo.addons.mail.tools.discuss import Store
 
 
 class QueueJobBatch(models.Model):
@@ -121,8 +119,5 @@ class QueueJobBatch(models.Model):
             "failed_percentage",
         )
 
-    def _to_store(self, store: Store):
-        fnames = self._to_store_fnames()
-        for rec in self:
-            data = rec.read(fnames)[0]
-            store.add(rec, data)
+    def _store_batch_fields(self, res):
+        res.extend(self._to_store_fnames())

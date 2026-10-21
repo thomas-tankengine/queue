@@ -6,26 +6,26 @@
 <templates>
     <t t-name="queue_job_batch.QueueJobBatchMenu">
         <Dropdown
-            t-if="store.hasQueueJobBatchUserGroup"
+            t-if="this.store.hasQueueJobBatchUserGroup"
             position="'bottom-end'"
-            state="dropdown"
-            beforeOpen.bind="onBeforeOpen"
-            menuClass="discussSystray.menuClass"
+            state="this.dropdown"
+            beforeOpen.bind="this.onBeforeOpen"
+            menuClass="this.discussSystray.menuClass"
         >
             <button>
                 <i class="fa fa-lg fa-list" role="img" aria-label="Job batches" />
                 <span
-                    t-if="store.queueJobBatchCounter"
-                    t-esc="store.queueJobBatchCounter"
+                    t-if="this.store.queueJobBatchCounter"
+                    t-esc="this.store.queueJobBatchCounter"
                     class="o_ActivityMenuView_counter badge"
                 />
             </button>
             <t t-set-slot="content">
                 <div
-                    t-att-class="`${discussSystray.contentClass} o-queue-job-batch-QueueJobBatchMenu`"
+                    t-att-class="`${this.discussSystray.contentClass} o-queue-job-batch-QueueJobBatchMenu`"
                 >
                     <div
-                        t-if="store.queueJobBatchCounter === 0"
+                        t-if="this.store.queueJobBatchCounter === 0"
                         class="o-mail-ActivityMenu-empty align-items-center text-muted p-2 opacity-50 d-flex justify-content-center"
                     >
                         <span>No jobs to view.</span>
@@ -35,7 +35,7 @@
                         name="queueJobBatches"
                     >
                         <t
-                            t-foreach="Object.values(store.QueueJobBatch.records)"
+                            t-foreach="Object.values(this.store.QueueJobBatch.records)"
                             t-as="queueJobBatch"
                             t-key="queueJobBatch.id"
                         >
@@ -68,7 +68,7 @@
                                     >
                                         <t
                                             t-set="group"
-                                            t-value="getGroupInfo(queueJobBatch)"
+                                            t-value="this.getGroupInfo(queueJobBatch)"
                                         />
                                         <ColumnProgress
                                             t-if="queueJobBatch.job_count"
@@ -91,7 +91,7 @@
                         <a
                             href="#"
                             class="list-group-item list-group-item-action p-2 border-0 text-primary text-center"
-                            t-on-click="openMyJobBatches"
+                            t-on-click="this.openMyJobBatches"
                         >
                             View all job batches
                         </a>

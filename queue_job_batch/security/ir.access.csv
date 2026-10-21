@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_queue_job_batch_user,queue job batch user,queue.job.batch,queue_job_batch.group_queue_job_batch_user,ru,
+access_queue_job_batch_manager,queue job batch manager,queue.job.batch,queue_job.group_queue_job_manager,crud,
+access_queue_job_queue_job_batch_user,queue job batch user on queue job,queue.job,queue_job_batch.group_queue_job_batch_user,r,
